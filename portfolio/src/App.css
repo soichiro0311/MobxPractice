@@ -1,0 +1,47 @@
+@charset "UTF-8";
+.App {
+  text-align: center; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px; }
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white; }
+
+.App-title {
+  font-size: 1.5em; }
+
+.App-intro {
+  font-size: large; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.counter-container {
+  margin: 20% 45%;
+  width: 100%; }
+
+.countup {
+  display: inline-block;
+  padding: 20px;
+  /* 余白指定 */
+  height: 100px; }
+
+.countdown {
+  display: inline-block;
+  padding: 20px;
+  /* 余白指定 */
+  height: 100px; }
+
+.display-number {
+  display: inline-block;
+  padding: 20px;
+  /* 余白指定 */
+  height: 100px; }
