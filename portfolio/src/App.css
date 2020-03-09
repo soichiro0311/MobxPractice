@@ -1,7 +1,3 @@
-@charset "UTF-8";
-.App {
-  text-align: center; }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px; }
@@ -18,6 +14,10 @@
 .App-intro {
   font-size: large; }
 
+#root {
+  width: 100%;
+  height: 100%; }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg); }
@@ -25,23 +25,20 @@
     transform: rotate(360deg); } }
 
 .counter-container {
-  margin: 20% 45%;
-  width: 100%; }
+  margin: 20% 10% 20% 40%;
+  width: 20%;
+  background-color: #3fda20;
+  text-align: center; }
 
 .countup {
   display: inline-block;
   padding: 20px;
-  /* 余白指定 */
   height: 100px; }
 
 .countdown {
   display: inline-block;
   padding: 20px;
-  /* 余白指定 */
   height: 100px; }
 
 .display-number {
-  display: inline-block;
-  padding: 20px;
-  /* 余白指定 */
-  height: 100px; }
+  padding: 20px; }

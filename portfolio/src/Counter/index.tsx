@@ -13,15 +13,18 @@ export default class Counter extends React.Component<Props> {
         const { countStore } = this.props;
         return (
             <div className="counter-container">
-                <div className="countup">
-                    <button onClick={countStore!.countUp.bind(countStore)}> + </button>
-                </div>
                 <div className="display-number">
                     {countStore!.currentNumber}
                 </div>
-                <div className="countdown">
-                    <button onClick={countStore!.countDown.bind(countStore)}> - </button>
+                <div className='operation'>
+                    <div className="countup">
+                        <button onClick={countStore!.countUp.bind(countStore)}> + </button>
+                    </div>
+                    <div className="countdown">
+                        <button onClick={countStore!.countDown.bind(countStore)}> - </button>
+                    </div>
                 </div>
+
             </div>
         )
     }
