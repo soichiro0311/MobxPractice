@@ -30,3 +30,11 @@ it('カウントダウンコンポーネントが描画されていること', (
     const wrapper = shallow(<Counter {...countStore} />);
     expect(wrapper.dive().find(".counter-container").find(".countdown").find("button")).toHaveLength(1);
 });
+
+it('FizzBuzzコンポーネントが描画されていること', () => {
+    const countStore = {
+        countStore: new CountStore()
+    }
+    const wrapper = shallow(<Counter {...countStore} />);
+    expect(wrapper.dive().find(".counter-container").find(".display-fizzbuzz")).toHaveLength(1);
+});

@@ -24,7 +24,9 @@ export default class Counter extends React.Component<Props> {
                         <button onClick={countStore!.countDown.bind(countStore)}> - </button>
                     </div>
                 </div>
-
+                <div className="display-fizzbuzz">
+                    {countStore!.fizzBuzz()}
+                </div>
             </div>
         )
     }
