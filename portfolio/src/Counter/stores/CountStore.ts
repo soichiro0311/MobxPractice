@@ -1,17 +1,24 @@
 import { observable } from 'mobx';
 
-export default class CountStore {
+export interface ICountStore {
+    currentNumber: number,
+    countUp: Function,
+    countDown: Function,
+    fizzBuzz: Function,
+}
+
+export default class CountStore implements ICountStore {
     @observable currentNumber: number;
 
     constructor() {
         this.currentNumber = 0;
     }
 
-    public countUp() {
+    public countUp(this: CountStore) {
         this.currentNumber++;
     }
 
-    public countDown() {
+    public countDown(this: CountStore) {
         this.currentNumber--;
     }
 
