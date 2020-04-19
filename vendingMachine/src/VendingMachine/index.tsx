@@ -6,9 +6,9 @@ interface Props {
 
 
 export default class VendingMachine extends React.Component<Props>{
-    colaItemProps: ItemProps = { itemName: "cola" }
-    teaItemProps: ItemProps = { itemName: "tea" }
-    coffeeItemProps: ItemProps = { itemName: "coffee" }
+    colaItemProps: ItemProps = { itemCssName: "cola", itemPrice: 120 }
+    teaItemProps: ItemProps = { itemCssName: "tea", itemPrice: 100 }
+    coffeeItemProps: ItemProps = { itemCssName: "coffee", itemPrice: 130 }
     public render() {
         return (
             <div className="item-container">

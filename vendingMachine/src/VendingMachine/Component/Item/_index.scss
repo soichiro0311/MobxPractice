@@ -1,0 +1,31 @@
+.item-display-container{    
+    height:400px;
+    width: 200px;
+    display: inline-block;
+}
+
+.item-display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item{
+    height:200px;
+    width: 200px;
+    background-repeat:  no-repeat;
+}
+
+.cola-item{
+    @extend .item;
+    background-image:url(./asset/cola.jpg);
+}
+
+.tea-item{
+    @extend .item;
+    background-image:url(./asset/tea.jpg);
+}
+
+.coffee-item{
+    @extend .item; 
+    background-image:url(./asset/coffee.jpg);
+}
