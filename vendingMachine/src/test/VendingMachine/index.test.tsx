@@ -5,11 +5,12 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Item from "../../VendingMachine/Component/Item"
 import DepositMoneyStore from '../../VendingMachine/Store/DepositMoneyStore'
+import PurchaseItemStore from '../../VendingMachine/Store/PurchaseItemStore';
 
 configure({ adapter: new Adapter() });
 
 const createProps = () => {
-    const props = { depositMoneyStore: new DepositMoneyStore() }
+    const props = { depositMoneyStore: new DepositMoneyStore(), purchaseItemStore: new PurchaseItemStore() }
     return props;
 }
 
@@ -78,5 +79,58 @@ describe('入金処理', () => {
     it('未入金の場合、下のフォームから入金してくださいと表示されること', () => {
         const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
         expect(wrapper.find(".input-money").text()).toEqual("下のフォームから入金してください");
+    });
+})
+
+describe('購入済み商品表示', () => {
+    it('購入済み商品エリアが表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        expect(wrapper.find('.purchase-item-container')).toHaveLength(1);
+        expect(wrapper.find('.purchase-item-container').find("h1").text()).toEqual("購入済み商品");
+    });
+
+    it('コーラを購入すると購入済み商品エリアにコーラが1で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(0).text()).toEqual("コーラ: 0");
+        wrapper.find(Item).at(0).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(0).text()).toEqual("コーラ: 1");
+    });
+
+    it('コーラを1個購入済みの場合、コーラを購入すると購入済み商品エリアにコーラが2で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        wrapper.find(Item).at(0).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(0).text()).toEqual("コーラ: 1");
+        wrapper.find(Item).at(0).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(0).text()).toEqual("コーラ: 2");
+    });
+
+    it('お茶を購入すると購入済み商品エリアにお茶が1で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(1).text()).toEqual("お茶: 0");
+        wrapper.find(Item).at(1).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(1).text()).toEqual("お茶: 1");
+    });
+
+    it('お茶を1個購入済みの場合、お茶を購入すると購入済み商品エリアにお茶が2で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        wrapper.find(Item).at(1).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(1).text()).toEqual("お茶: 1");
+        wrapper.find(Item).at(1).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(1).text()).toEqual("お茶: 2");
+    });
+
+    it('コーヒーを購入すると購入済み商品エリアにコーヒーが1で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(2).text()).toEqual("コーヒー: 0");
+        wrapper.find(Item).at(2).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(2).text()).toEqual("コーヒー: 1");
+    });
+
+    it('コーヒーを1個購入済みの場合、コーヒーを購入すると購入済み商品エリアにコーヒーが2で表示されること', () => {
+        const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
+        wrapper.find(Item).at(2).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(2).text()).toEqual("コーヒー: 1");
+        wrapper.find(Item).at(2).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(2).text()).toEqual("コーヒー: 2");
     });
 })

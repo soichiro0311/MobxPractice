@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface ItemProps {
     itemCssName: string
     itemPrice: number
+    purchaseFunction: () => void
 }
 
 export default class Item extends React.Component<ItemProps> {
@@ -12,7 +13,7 @@ export default class Item extends React.Component<ItemProps> {
                 <div className="item-display">
                     <div className={this.props.itemCssName + '-item'} />
                     <div className="item-price">価格: {this.props.itemPrice}円</div>
-                    <button type="button" >購入</button>
+                    <button type="button" onClick={this.props.purchaseFunction}>購入</button>
                 </div>
             </div>
         )
