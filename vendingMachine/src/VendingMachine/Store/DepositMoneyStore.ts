@@ -4,7 +4,11 @@ export default class DepositMoneyStore {
     @observable depositMoney: number = 0;
 
     add = (depositMoneyStr: string) => {
-        this.depositMoney = Number(depositMoneyStr);
+        this.depositMoney = this.depositMoney + Number(depositMoneyStr);
+    }
+
+    subtract = (subtractMoney: number) => {
+        this.depositMoney = this.depositMoney - subtractMoney;
     }
 
     depositAmount = () => {

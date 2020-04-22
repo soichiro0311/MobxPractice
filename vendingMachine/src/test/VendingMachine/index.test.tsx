@@ -66,6 +66,15 @@ describe('入金処理', () => {
         expect(wrapper.find(".input-money").text()).toEqual("投入金額: 120");
     });
 
+    it('すでに120円入金されている状態で130円入力すると入金額が250円で表示されること', () => {
+        const props = createProps();
+        props.depositMoneyStore.add("120")
+        const wrapper = shallow(<VendingMachine  {...props} />).dive();
+        wrapper.find('input').simulate('change', { target: { value: '130' } });
+        wrapper.find('button').simulate('click');
+        expect(wrapper.find(".input-money").text()).toEqual("投入金額: 250");
+    });
+
     it('入金ボタンが表示されること', () => {
         const wrapper = shallow(<VendingMachine  {...createProps()} />).dive();
         expect(wrapper.find('button').text()).toEqual("入金")
@@ -134,3 +143,27 @@ describe('購入済み商品表示', () => {
         expect(wrapper.find('.purchase-item-container').find("ul").find("li").at(2).text()).toEqual("コーヒー: 2");
     });
 })
+
+describe('購入処理', () => {
+    it('入金額が200円でコーラを購入すると入金額の表示が80円になること', () => {
+        const props = createProps();
+        props.depositMoneyStore.add("200")
+        const wrapper = shallow(<VendingMachine  {...props} />).dive();
+        wrapper.find(Item).at(0).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.money-container').find(".input-money").text()).toEqual("投入金額: 80");
+    });
+    it('入金額が200円でお茶を購入すると入金額の表示が100円になること', () => {
+        const props = createProps();
+        props.depositMoneyStore.add("200")
+        const wrapper = shallow(<VendingMachine  {...props} />).dive();
+        wrapper.find(Item).at(1).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.money-container').find(".input-money").text()).toEqual("投入金額: 100");
+    });
+    it('入金額が200円でコーヒーを購入すると入金額の表示が70円になること', () => {
+        const props = createProps();
+        props.depositMoneyStore.add("200")
+        const wrapper = shallow(<VendingMachine  {...props} />).dive();
+        wrapper.find(Item).at(2).dive().find(".item-display").find("button").simulate("click")
+        expect(wrapper.find('.money-container').find(".input-money").text()).toEqual("投入金額: 70");
+    });
+});

@@ -40,26 +40,32 @@ export default class VendingMachine extends React.Component<Props>{
         }
 
         const createColaItemProps = () => {
+            const itemPrice = 120
             const onPurchaseFunction = () => {
                 purchaseItemStore.purchase("cola")
+                this.props.depositMoneyStore.subtract(itemPrice)
             }
-            const props: ItemProps = { itemCssName: "cola", itemPrice: 120, purchaseFunction: onPurchaseFunction }
+            const props: ItemProps = { itemCssName: "cola", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
             return props;
         }
 
         const createTeaItemProps = () => {
+            const itemPrice = 100
             const onPurchaseFunction = () => {
                 purchaseItemStore.purchase("tea")
+                this.props.depositMoneyStore.subtract(itemPrice)
             }
-            const props: ItemProps = { itemCssName: "tea", itemPrice: 100, purchaseFunction: onPurchaseFunction }
+            const props: ItemProps = { itemCssName: "tea", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
             return props;
         }
 
         const createCoffeeItemProps = () => {
+            const itemPrice = 130
             const onPurchaseFunction = () => {
                 purchaseItemStore.purchase("coffee")
+                this.props.depositMoneyStore.subtract(itemPrice)
             }
-            const props: ItemProps = { itemCssName: "coffee", itemPrice: 130, purchaseFunction: onPurchaseFunction }
+            const props: ItemProps = { itemCssName: "coffee", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
             return props;
         }
 
