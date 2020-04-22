@@ -1,4 +1,4 @@
-import { observable } from '../../../node_modules/mobx';
+import { observable } from 'mobx';
 
 export default class PurchaseItemStore {
     @observable purchaseItemAmountMap = new Map<string, number>()

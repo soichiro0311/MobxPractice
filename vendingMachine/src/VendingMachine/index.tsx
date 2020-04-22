@@ -1,5 +1,7 @@
 import * as React from 'react';
-import Item, { ItemProps } from './Component/Item'
+import Cola from './Component/Item/Cola'
+import Tea from './Component/Item/Tea'
+import Coffee from './Component/Item/Coffee'
 import { inject, observer } from 'mobx-react';
 import DepositMoneyStore from './Store/DepositMoneyStore';
 import PurchaseItemStore from './Store/PurchaseItemStore';
@@ -23,12 +25,15 @@ export default class VendingMachine extends React.Component<Props>{
 
         var isNotAlreadyDepositMoney: boolean = depositMoneyStore.isNotDeposit()
 
+
+
         const changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
             this.depositMoneyFormStr = e.target!.value;
         }
 
         const addMoney = () => {
             depositMoneyStore.add(this.depositMoneyFormStr)
+            this.depositMoneyFormStr = ""
         }
 
         const displayShouldDepositMoneyMessage = () => {
@@ -39,42 +44,12 @@ export default class VendingMachine extends React.Component<Props>{
             return <div className="input-money">投入金額: {depositMoneyStore.depositAmount()}</div>
         }
 
-        const createColaItemProps = () => {
-            const itemPrice = 120
-            const onPurchaseFunction = () => {
-                purchaseItemStore.purchase("cola")
-                this.props.depositMoneyStore.subtract(itemPrice)
-            }
-            const props: ItemProps = { itemCssName: "cola", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
-            return props;
-        }
-
-        const createTeaItemProps = () => {
-            const itemPrice = 100
-            const onPurchaseFunction = () => {
-                purchaseItemStore.purchase("tea")
-                this.props.depositMoneyStore.subtract(itemPrice)
-            }
-            const props: ItemProps = { itemCssName: "tea", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
-            return props;
-        }
-
-        const createCoffeeItemProps = () => {
-            const itemPrice = 130
-            const onPurchaseFunction = () => {
-                purchaseItemStore.purchase("coffee")
-                this.props.depositMoneyStore.subtract(itemPrice)
-            }
-            const props: ItemProps = { itemCssName: "coffee", itemPrice, purchaseFunction: onPurchaseFunction, depositMoney: depositMoneyStore.depositAmount() }
-            return props;
-        }
-
         return (
             <div className="vending-machine-container">
                 <div className="item-container" >
-                    <Item {...createColaItemProps()} />
-                    <Item {...createTeaItemProps()} />
-                    <Item {...createCoffeeItemProps()} />
+                    <Cola {...this.props} />
+                    <Tea {...this.props} />
+                    <Coffee {...this.props} />
                     <div className="money-container">{
                         isNotAlreadyDepositMoney ?
                             displayShouldDepositMoneyMessage() : displayAlreadyDepositMoney()}
